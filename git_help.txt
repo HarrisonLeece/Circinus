@@ -1,6 +1,7 @@
 RETREIVING UPDATED CODE:
-
-
-PUSH YOUR CHANGES:
-
+git fetch 
+COMMIT YOUR CHANGES:
+git add --all
 MERGE YOUR CHANGES:
+Harrison will manage merges.  For now you should know that all changes should be made on a development branch and merged into the master branch at a 
+later time.  
