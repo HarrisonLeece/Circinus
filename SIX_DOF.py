@@ -193,4 +193,4 @@ if __name__ == '__main__':
     rot_tester.report_body_vector()
 
     rocenv = Environment(None, None)
-    rocket = Rocket(rocket_data, rocenv, )
+    rocket = Rocket(rocket_data, rocenv)

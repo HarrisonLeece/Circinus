@@ -1,7 +1,18 @@
-RETREIVING UPDATED CODE:
-git fetch 
+RETREIVING UPDATED CODE FROM GITHUB REPOSITORY:
+>git pull <<< retreives all remotes and copies changes from the github repository
+SWITCHING BRANCHES:
+>git switch <branch-name>
+CREATE A NEW BRANCH
+>git branch <new-branch-name>
+CHECKING STATUS:
+>git status <<< Will tell you which branch you are on and if you have any staged changes ready for commit
 COMMIT YOUR CHANGES:
-git add --all
+First make some changes you want to make to some file!
+>git add --all <<< Adds all changes you made to any file to the 'stage'
+>git commit -m 'message goes here' <<< make a commit with a message (A message is required)
+PUSH YOUR CHANGES:
+Once you have changes commited
+> git push origin <branch-name> <<< pushes commits to github to the branch you specified (in most cases it should match the branch you are currently on)
 MERGE YOUR CHANGES:
 Harrison will manage merges.  For now you should know that all changes should be made on a development branch and merged into the master branch at a 
 later time.  
