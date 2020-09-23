@@ -16,5 +16,9 @@ if __name__ == '__main__':
     #sim_obj1 is a list containing both a rocket and rocket environment object
     sim_obj1 = [rocket, rocenv]
     #object list -- because objects can be added to the list dynamically and simulated
-    #(for example a first stage and second stage)
+    #(for example a first stage and second stage from one rocket object)
     object_list = [sim_obj1]
+'''
+    while (condition):
+        simulation
+'''

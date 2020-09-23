@@ -116,7 +116,6 @@ class Rocket(Rotator):
         self.relative_velocity = np.array([[None],[None],[None]])
 
 
-
     '''
     Calculate the angle of attack (alpha) in radians using the rocket's velocity direction
     and rotation state.
@@ -145,7 +144,18 @@ class Rocket(Rotator):
     '''
     def calculate_tvc_rotation(self):
         pass
-
+    '''
+    lock rotation of the craft despite forces acting on the body
+    useful for constraining rocket to a rail at launch for example
+    (Prevents integration of accelerations to velocities)
+    '''
+    def lock_rotation(self):
+        pass
+    '''
+    Unlocks rotation
+    '''
+    def unlock_rotation(self):
+        pass
 class Environment():
     '''
     The environment object helps compartmentalize environmental data (atmospheric
