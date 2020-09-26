@@ -191,8 +191,70 @@ class Environment():
         pass
     def fetch_atm_density(self, altitude):
         pass
+'''
+The Reference object is a Fixed Earth, centered at 0,0,0 with no rotation
+'''
+class Reference():
+    def __init__(self):
+        self.position = np.array([[0],[0],[0]])
+'''
+Inherits the Reference (Non-rotating earth) and creates a rotating earth
+'''
+class RotatingEarth(Reference):
+    def __init__(self):
+        self.position= np.array([[0],[0],[0]])
+        #Angular velocity in radians/s
+        self.angular_velocity = 7.2921159 * 10**-5
+        #Angular displacement around the z axis
+        self.angular_dispalcement = 0
+    def rotate_step(self, step):
+        self.angular_dispalcement = self.angular_dispalcement + self.angular_velocity*step
 
+class Launchpad(RotatingEarth):
 
+    def __init__(self, units='english'):
+        self.EARTH_RADIUS_FT = 20902000
+        self.EARTH_RADIUS_M = 6371000
+        #set units for this object
+        self.units = units
+        #Using spherical coordinates for this (r,theta,phi)
+        self.position= np.array([[self.get_radius],[0],[0]])
+        #Angular velocity in radians/s
+        self.angular_velocity = 7.2921159 * 10**-5
+        #Angular displacement around the z axis
+        self.angular_dispalcement = 0
+
+    def get_radius(self):
+        if self.units == 'english':
+            return self.EARTH_RADIUS_FT
+        return self.EARTH_RADIUS_M
+    '''
+    Turn the coordinates of the launch site into spherical coordinates and
+    set as the position of the object
+
+    RRS coordinates:
+    fmt=dms
+    35 degrees, 21 minutes, 2 seconds North
+    117 degrees, 48 minutes, 30 seconds West
+    fmts:>> 'dd' << decimal degree, >> 'dmm' << degree + decimal minutes
+    >> dms << degrees, minutes, and seconds
+
+    Format input as nested lists, North first, then west
+     list = [[35,21,2],[117,48,39]]
+    '''
+    def resolve_coordinates(self, input, fmt='dms'):
+        #parse the input list into radians in format: [North Radians], [West Radians]
+        radians_list = []
+        for list in input:
+            degrees = list[0]
+            if (fmt == 'dmm' or fmt == 'dms'):
+                decimals = list[1]*1/60
+                if (fmt == 'dms'):
+                    decimals = decimals + list[2]*1/3600
+                degrees = degrees + decimals
+            #convert degrees to radian
+            radians_list.append(degrees*np.pi/180)
+        #
 if __name__ == '__main__':
     with open('rocket_info.yaml') as rocket_info:
         rocket_data = yaml.load(rocket_info, Loader=yaml.FullLoader)
